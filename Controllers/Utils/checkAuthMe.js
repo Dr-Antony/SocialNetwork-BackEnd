@@ -2,7 +2,7 @@
 import jwt from "jsonwebtoken";
 
 const checkAuthMe = (req, res, next) => {
-    console.log(req.headers.authorization)
+    // console.log(req.headers.authorization)
     const token = (req.headers.authorization || '').replace(/Bearer\s?/, '');
     if (token) {
         try {
