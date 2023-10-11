@@ -4,7 +4,7 @@ import cors from "cors";
 
 
 
-import { authMe, login, registration, updateData } from "./Controllers/UserController.js";
+import { authMe, login, registration, updateData , getAllUsers} from "./Controllers/UserController.js";
 import { registerValidation, handleValidationErrors } from "./Validation/RegisterValidator.js";
 import { loginValidation } from "./Validation/LoginValidation.js";
 import checkAuthMe from "./Controllers/Utils/checkAuthMe.js";
@@ -31,3 +31,6 @@ app.post('/auth/register',registerValidation, handleValidationErrors, registrati
 app.post('/auth/login', loginValidation, handleValidationErrors,login)
 app.get('/auth/me', checkAuthMe, authMe)
 app.patch('/user/:id', checkAuthMe,updateData)
+
+
+app.get('/users', getAllUsers)

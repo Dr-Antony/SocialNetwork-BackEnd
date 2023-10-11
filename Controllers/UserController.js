@@ -3,8 +3,7 @@ import bcrypt from "bcrypt";
 
 import UserModel from "../Models/User.js";
 
-
-
+/////////////////////////////////////////////////////////////////////////
 export const registration = async (req, res) => {
     try {
         const password = req.body.password;
@@ -130,4 +129,17 @@ export const updateData = async (req, res) => {
     }
 }
 
+///////////////////////////////////////////////////////////////
 
+
+export const getAllUsers = async (req,res)=> {
+    try {
+        const users = await UserModel.find();
+        res.json(users)
+    } catch (error) {
+        console.log(error)
+        res.status(404).json({
+            success: false
+        })
+    }
+}
