@@ -11,7 +11,7 @@ import checkAuthMe from "./Controllers/Utils/checkAuthMe.js";
 
 mongoose.connect('mongodb+srv://admin:12345@cluster0.aebkplr.mongodb.net/SocialNetwork?').then(() => { console.log('DB has been connected!') }).catch((err) => { console.log(err) })
 
-
+console.log(mongoose.version)
 const app = express();
 const port = 4000;
 app.use(express.json());

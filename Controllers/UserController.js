@@ -132,14 +132,49 @@ export const updateData = async (req, res) => {
 ///////////////////////////////////////////////////////////////
 
 
-export const getAllUsers = async (req,res)=> {
+export const getAllUsers = async (req, res) => {
+    const { page = 1, limit = 5 } = req.query;
     try {
-        const users = await UserModel.find();
-        res.json(users)
+        console.log(req.query)
+        const usersTotalCount = await UserModel.count();
+        const users = await UserModel.find().skip((page - 1) * limit).limit(limit);
+        console.log()
+        res.json({users,usersTotalCount})
     } catch (error) {
         console.log(error)
         res.status(404).json({
-            success: false
+            success: false,
+            error
         })
     }
 }
+
+//////////////////Это элементарная пагинация с которой ты уже можешь работать//////////////////////
+// console.log(req.query)
+// const users = await UserModel.find().skip((page - 1) * limit).limit(limit);
+// res.json(users)
+////////////////////////////////////////
+
+
+
+
+// [
+//     {
+//         $match: {}
+//     },
+//     {
+//         $facet: {
+//             metaData: [{
+//                 $count: 'totalDocument'
+//             }],
+//             data: [
+//                 {
+//                     $skip: (page - 1) * limit
+//                 },
+//                 {
+//                     $limit: limit
+//                 }
+//             ]
+//         }
+//     }
+// ]
